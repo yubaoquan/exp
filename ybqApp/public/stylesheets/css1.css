@@ -1,0 +1,109 @@
+* {
+	border-radius: 0.2em;
+}
+
+.hello {
+	border: 1px solid #ccc;
+	color :blue;	
+
+}
+
+body {
+	/*background-image: url(../images/bg2.jpg);*/
+	background-color: #d9d0b2;
+	background-position: center;
+	background-attachment: fixed;
+}
+
+.mainContent {
+	float :left;
+	line-height: 18px;
+	/*height: 280px;*/
+	width: 600px;
+}
+
+#sidebar-a {
+	float: right;
+	width: 200px;
+	line-height: 18px;
+	border-left:1px solid gray;
+}
+
+.padding {
+	padding: 25px;
+	/*border: 1px solid #ccc;*/
+	/*background-color: red;*/
+}
+
+#page-container {
+	/*top: 38px;*/
+	margin-top: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 0.5em;
+	overflow:hidden;
+	width: 900px;
+	/*margin: auto;*/
+	background-color: #F2FFC1;
+	/*半透明*/
+	filter:alpha(Opacity=80);
+	-moz-opacity:0.8;
+	opacity: 0.8;
+}
+
+#content {
+	/*border: 1px solid gray;*/
+	height: 300px;
+	overflow: auto;
+	background: black;
+	border-radius: 0.5em;
+}
+
+.whatUSay {
+	padding-left: 20px;
+	color: yellow;
+	/*padding-top: 5px;*/
+}
+
+.peiliaoWord {
+	padding-left: 20px;
+	color: white;
+}
+
+.singleSentence {
+	/*background-color: #B4E1A2;*/
+	color: yellow;
+	line-height: 5px;
+}
+
+.peiliaoSingleSentence {
+	line-height: 5px;
+	color: white;
+	/*background-color: #72BBA3;*/
+}
+
+#iSay {
+	resize: none;
+}
+
+.tooltip {
+	filter:alpha(Opacity=80);
+	-moz-opacity:0.8;
+	opacity: 0.8;
+	background: #19B6E1;
+	
+}
+
+.webwidget_menu_dropdown {
+	border-radius: 0.4em;
+}
+
+.currentPeiliao {
+	color: yellow;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.test {
+	color: yellow;
+}

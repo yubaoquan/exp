@@ -1,0 +1,89 @@
+.current {
+	color: rgb(255, 255, 255); 
+	line-height: 20px; 
+	padding: 2px;
+
+}
+.li1 {
+    background-color: #008748;
+}
+
+.li2 {
+	background-color: #03484C; 
+	margin-right: 2px; 
+	margin-top: 10px;
+}
+
+.ul1 {
+	background-color: rgb(86, 169, 1); 
+	width: 200px; 
+	margin-top: 20px; 
+	left: 0px;
+}
+
+.webwidget_menu_dropdown ul{
+    padding: 0px;
+    margin: 0px;
+    font-family:Arial;
+    font-size: 1em;
+    margin-right: 20px; 
+    width: 120px;
+    border-radius: 1px;
+    line-height: 2em;
+
+}
+
+.webwidget_menu_dropdown ul li{
+    font-size: 1.2em;
+    list-style: none;
+    position: relative;
+    text-align: center;
+    height: 30px;
+}
+
+.webwidget_menu_dropdown ul li ul{
+    padding-bottom: 5px;
+    position: absolute;
+    z-index: 9999;
+    display: none;
+    margin-top: 0;
+    left: 0px;
+    height: 25px;
+}
+
+.webwidget_menu_dropdown ul li ul li{
+    border-radius:0.2em;
+    border-bottom: 1px solid #CEFDFD;
+    margin: 0px;
+    float: none;
+    word-wrap:break-word;
+    cursor: pointer;
+    height: 25px;
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
+ .red {
+    background: #19F8F8;
+    border-radius: 0.4em;
+ }
+
+ .red:hover {
+    background: blue;
+    border-radius: 0.4em;
+    cursor:pointer;
+    font-weight: bold;
+    font-size: 20px;
+
+ }
+
+ .aPeiliao {
+    background-color: #64B80A;
+ }
+
+ .aPeiliao:hover {
+    font-weight: bold;
+    font-size: 20px;
+    background: #83E8E7;
+    cursor:pointer;
+ }
