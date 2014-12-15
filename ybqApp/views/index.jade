@@ -1,15 +1,15 @@
 doctype html
-html(ng-app="menziApp" ng-controller="menziController")
+html(ng-controller="menziController" ng-app="menziApp")
   head
     title= title
     meta(http-equiv="content-type", content="text/html; charset=UTF-8")
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/css1.css')
     link(rel='stylesheet', href='/stylesheets/header.css')
+    link(rel='stylesheet', href='/stylesheets/peiliaoDropdown.css')
+    link(rel='stylesheet', href='/stylesheets/myDropdown.css')
     link(rel='stylesheet', href='/stylesheets/jquery-ui-themes-1.11.2/themes/smoothness/jquery-ui.css')
 
-    
-    script(src="/javascripts/controller.js")
     script(src="/javascripts/zhoumenzi.js")
     script(src="/javascripts/yujiong.js")
     script(src="/javascripts/joke.js")
@@ -19,17 +19,58 @@ html(ng-app="menziApp" ng-controller="menziController")
     script(src="/javascripts/aming.js")
     script(src="/javascripts/variable.js")
     script(src="/javascripts/js2.js")
-    script(src="/javascripts/dropDown.js")
     script(src="/javascripts/menzi.js")
 
-    script(src="/javascripts/test.js")
-    script(src="/javascripts/peiliaoDropDown.js")
-    script(src="/javascripts/myDropDown.js")
+    
 
     script(src="/javascripts/ckeditor/ckeditor.js")
     script(src='http://libs.baidu.com/jquery/2.0.0/jquery.js')
     script(src='http://libs.useso.com/js/jqueryui/1.10.4/jquery-ui.js')
     script(src='http://lib.sinaapp.com/js/angular.js/angular-1.2.19/angular.js')
 
+    script(src="/javascripts/controller.js")
+    script(src="/javascripts/dropDown.js")
+    script(src="/javascripts/myDropDown.js")
+
   body(onkeydown="BindEnter(event)" onload="pageLoad()")
     div(ng-include="srcUrl") 
+    div#page-container
+        div.mainContent
+            div.hello
+                p#hello
+                    img#a(src="images/zhoumenzi.jpg")
+                    你好,我是周闷子 ⊙ˍ⊙ 很高兴陪你聊天
+            div.padding
+                div.sentence
+                    div#content
+                    p#say2who 对闷子说
+                    div
+                        textarea#iSay(rows="6" cols="65" name="editor1")
+                    input#ok(type="submit" value="说好了" onclick="talk()")
+                    p 
+                    input(type="radio" name="sendMethod" value="en" onclick="changeSendMethod(this)") 
+                    | Enter发送
+                    p 
+                    input(type="radio" name="sendMethod" value="ce" onclick="changeSendMethod(this)" checked="checked") 
+                    | Ctrl+Enter发送
+                    p 
+                    input(type="radio" name="sendMethod" value="ck" onclick="changeSendMethod(this)") 
+                    | 使用CKEditor
+        div#sidebar-a
+            div.padding
+                h2#peiliaoList 陪聊列表
+                div#webwidget_menu_dropdown.webwidget_menu_dropdown
+                    ul(style="font-size: 14px;")
+                        li.li1 可用陪聊
+                            ul#availablePeiliaos.ul1
+                                li#zhoumenzi.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 周闷子
+                                li#yujiong.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 玉扃
+                                li#wuya.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 乌鸦
+                                li#toto.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 2TO
+                                li#xiaolong.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 小龙
+                                li#aming.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 阿名
+                        li.li2 开发中陪聊
+                            ul.ul1(onclick="sorryInfo()")
+                                li.red(ng-repeat="uPeiliao in uPeiliaos") {{uPeiliao.name}}
+            div.gif
+                img.gay(ng-src="{{gay.imageUrl}}")
