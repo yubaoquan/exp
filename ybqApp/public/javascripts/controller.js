@@ -1,25 +1,22 @@
-var menziApp = angular.module('menziApp', []);
+'use strict';
 
-// menziApp.controller('menziController', function ($scope) {
-//   $scope.gay = 
-//     {"imageUrl": "../images/bili.gif"};
+var menziController = angular.module('menziControllers', []);
 
-//   console.log('here2333');
-// });
-menziApp.controller('menziController', ['$scope', '$http', function ($scope, $http) {
-  $http.get('/data/a.json').success(function (data) {
-    $scope.uPeiliaos = data;
-  });
+menziController.controller('sideBarController', ['$scope', 'UPeiliao', function ($scope, UPeiliao) {
+  console.log('side bar controller');
   $scope.gay = {
-    "imageUrl" : "images/bili.gif"
+    "imageUrl" : "/images/bili.gif"
   };
-  $scope.srcUrl = 'header.html';
+  $scope.uPeiliaos = UPeiliao.query();
 }]);
 
-menziApp.controller('menziController', ['$scope', function ($scope) {
-  console.log('I am controller');
+menziController.controller('menziController', ['$scope', function ($scope) {
+  console.log('I am menzi controller');
   $scope.data = {
     name : "123"
   };
+  $scope.srcUrl = '/header.html';
+  // $scope.srcUrl = 'header.jade';
+  
 }]);
 

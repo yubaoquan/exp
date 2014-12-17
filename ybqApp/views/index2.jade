@@ -21,25 +21,27 @@ html(ng-controller="menziController" ng-app="menziApp")
     script(src="/javascripts/js2.js")
     script(src="/javascripts/menzi.js")
 
-    
-
     script(src="/javascripts/ckeditor/ckeditor.js")
     script(src='http://libs.baidu.com/jquery/2.0.0/jquery.js')
     script(src='http://libs.useso.com/js/jqueryui/1.10.4/jquery-ui.js')
     script(src='http://lib.sinaapp.com/js/angular.js/angular-1.2.19/angular.js')
+    script(src='http://lib.sinaapp.com/js/angular.js/angular-1.2.19/angular-resource.js')
 
+    script(src="/javascripts/app.js")
+    script(src="/javascripts/services.js")
     script(src="/javascripts/controller.js")
     script(src="/javascripts/dropDown.js")
     script(src="/javascripts/myDropDown.js")
 
   body(onkeydown="BindEnter(event)" onload="pageLoad()")
-    div(ng-include="srcUrl") 
+    div(ng-include="srcUrl")
+    include header
     div#page-container
         div.mainContent
             div.hello
                 p#hello
                     img#a(src="images/zhoumenzi.jpg")
-                    你好,我是周闷子 ⊙ˍ⊙ 很高兴陪你聊天
+                    |你好,我是周闷子 ⊙ˍ⊙ 很高兴陪你聊天
             div.padding
                 div.sentence
                     div#content
@@ -56,7 +58,7 @@ html(ng-controller="menziController" ng-app="menziApp")
                     p 
                     input(type="radio" name="sendMethod" value="ck" onclick="changeSendMethod(this)") 
                     | 使用CKEditor
-        div#sidebar-a
+        div#sidebar-a(ng-controller="sideBarController")
             div.padding
                 h2#peiliaoList 陪聊列表
                 div#webwidget_menu_dropdown.webwidget_menu_dropdown
