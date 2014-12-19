@@ -1,1 +1,1 @@
-npm start
+supervisor app
