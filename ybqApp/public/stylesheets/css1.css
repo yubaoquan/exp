@@ -107,3 +107,11 @@ body {
 .test {
 	color: yellow;
 }
+
+#ok {
+	margin-left: 6.8em;
+	margin-top: 0.2em;
+	width: 8em;
+	height: 2em;
+	font-size: 1.2em;
+}

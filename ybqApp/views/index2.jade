@@ -46,19 +46,15 @@ html(ng-controller="menziController" ng-app="menziApp")
                 div.sentence
                     div#content
                     p#say2who
-                    test=testdata
                     div
                         textarea#iSay(rows="6" cols="65" name="editor1")
-                    input#ok(type="submit" value="说好了" onclick="talk()")
-                    p 
                     input(type="radio" name="sendMethod" value="en" onclick="changeSendMethod(this)") 
                     | Enter发送
-                    p 
                     input(type="radio" name="sendMethod" value="ce" onclick="changeSendMethod(this)" checked="checked") 
                     | Ctrl+Enter发送
-                    p 
                     input(type="radio" name="sendMethod" value="ck" onclick="changeSendMethod(this)") 
                     | 使用CKEditor
+                    input#ok(type="submit" value="说好了" onclick="talk()")
         div#sidebar-a(ng-controller="sideBarController")
             div.padding
                 h2#peiliaoList 陪聊列表
@@ -66,12 +62,15 @@ html(ng-controller="menziController" ng-app="menziApp")
                     ul(style="font-size: 14px;")
                         li.li1 可用陪聊
                             ul#availablePeiliaos.ul1
-                                li#zhoumenzi.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 周闷子
-                                li#yujiong.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 玉扃
-                                li#wuya.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 乌鸦
-                                li#toto.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 2TO
-                                li#xiaolong.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 小龙
-                                li#aming.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 阿名
+                                for peiliao in peiliaos
+                                    li.aPeiliao(id=peiliao.id onclick="selectPeiliao(this)" title="陪聊名片加载失败")=peiliao.name
+                                //li#zhoumenzi.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败")=peiliao.name
+                             //   li#zhoumenzi.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 周闷子
+                          //      li#yujiong.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 玉扃
+                          //      li#wuya.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 乌鸦
+                           //     li#toto.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 2TO
+                            //    li#xiaolong.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 小龙
+                                //li#aming.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 阿名
                         li.li2 开发中陪聊
                             ul.ul1(onclick="sorryInfo()")
                                 li.red(ng-repeat="uPeiliao in uPeiliaos") {{uPeiliao.name}}

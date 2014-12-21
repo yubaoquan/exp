@@ -1,0 +1,21 @@
+doctype html
+html
+	head
+		meta(http-equiv="content-type", content="text/html; charset=UTF-8")
+		link(rel='stylesheet', href='/stylesheets/selectGender.css')
+
+		script(src="/javascripts/menzi.js")
+		script(src="/javascripts/js2.js")
+		script(src="/javascripts/variable.js")
+
+	body
+		h2 请选择你的性别哟 亲~
+		p
+			input(type="radio" name="gender" value="male" onclick="selectGender(this)" checked="checked")
+			|男
+		p
+			input(type="radio" name="gender" value="female" onclick="selectGender(this)" checked="checked")
+			|女
+		p
+			input(type="radio" name="gender" value="wtf" onclick="selectGender(this)" checked="checked")
+			|不男不女

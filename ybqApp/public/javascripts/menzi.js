@@ -52,7 +52,7 @@ function selectPeiliao(element) {
 	currentPeiliaoID = element.id;
 	currentPeiliao = peiliaoList[element.id];
 	if (currentPeiliaoID == "yujiong" && typeof(userGender) == "undefined") {
-		window.open ("selectGender.html", "newwindow", "height=250, width=300, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
+		window.open ("selectGender", "newwindow", "height=250, width=300, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
 	}
 	
 	var imgFilePath = "images/" + currentPeiliaoID + ".jpg";
