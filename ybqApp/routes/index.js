@@ -27,12 +27,17 @@ module.exports = function (app) {
       peiliaos : {
       	menzi : {
       		id : 'zhoumenzi',
-      		name : '周menzi'
+      		name : '周menzi',
+          xxx : '21333'
       	},
       	yujiong : {
       		id : 'yujiong',
       		name : '玉扃'
       	}
+      },
+      peiliao : {
+        id : 'zhoumenzi',
+        xxx : '213'
       },
       testdata : 'this is test data'
     });

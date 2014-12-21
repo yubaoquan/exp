@@ -63,7 +63,7 @@ html(ng-controller="menziController" ng-app="menziApp")
                         li.li1 可用陪聊
                             ul#availablePeiliaos.ul1
                                 for peiliao in peiliaos
-                                    li.aPeiliao(id=peiliao.id onclick="selectPeiliao(this)" title="陪聊名片加载失败")=peiliao.name
+                                    li.aPeiliao(id=peiliao.id onclick="selectPeiliao(this)" title="陪聊名片加载失败" xxx=peiliao.xxx)=peiliao.name
                                 //li#zhoumenzi.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败")=peiliao.name
                              //   li#zhoumenzi.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 周闷子
                           //      li#yujiong.aPeiliao(onclick="selectPeiliao(this)" title="陪聊名片加载失败") 玉扃

@@ -68,7 +68,10 @@ function selectPeiliao(element) {
 
 //界面打开时的初始化工作;
 function pageLoad() {
+// console.log(data);
+// alert('data.zhoumenzi.name:' + data.menzi.name);
 	currentPeiliaoElement = document.getElementById("zhoumenzi");
+alert(currentPeiliaoElement.getAttribute('xxx'));
 	selectPeiliao(currentPeiliaoElement);
 	sendMethod = "ce";
 	initTooltip();
