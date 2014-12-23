@@ -28,4 +28,6 @@ function getASentence (words) {
 	var index = rdm(words.length);
 	return words[index];
 }
-
+var a = 123;
+console.log(something.name);
+// a = something;

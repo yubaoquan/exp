@@ -1,4 +1,6 @@
 //==============================创建闷子角色==================================
+// var menziController = angular.module('menziControllers', []);
+
 var zhoumenzi = (function () {
 
 	//闷子的台词;
@@ -7,9 +9,24 @@ var zhoumenzi = (function () {
 		'...',
 		'你一脸!'
 	];
+	
+
+
+	// menziController.controller('dataController', function ($scope, $http) {
+ //      $http.get('/data/a.json').success(function(data) {
+ //          console.log('ajax ok');
+ //      });
+ //    });
+	 // var cards = CreditCard.query();
 
 	//闷子的说话方式;
 	var say = function (whatUSay) {
+		var something =$.ajax({url:"/data/a.json",async:false, dataType : "json"});
+		console.log(something.responseText);
+		for (var x in something) {
+			// console.log(x);
+		}
+
 		var words = menziWords;
 		var wordIndex = rdm(words.length);
 		var peiliaoWord = words[wordIndex];

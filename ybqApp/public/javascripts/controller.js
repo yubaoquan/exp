@@ -1,5 +1,5 @@
 'use strict';
-
+var something = {name : 'ybq'};
 var menziController = angular.module('menziControllers', []);
 
 menziController.controller('sideBarController', ['$scope', 'UPeiliao', function ($scope, UPeiliao) {
@@ -15,8 +15,5 @@ menziController.controller('menziController', ['$scope', function ($scope) {
   $scope.data = {
     name : "123"
   };
-  $scope.srcUrl = '/header.html';
-  // $scope.srcUrl = 'header.jade';
-  
+  something = 'c';
 }]);
-

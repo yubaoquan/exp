@@ -10,17 +10,6 @@ html(ng-controller="menziController" ng-app="menziApp")
     link(rel='stylesheet', href='/stylesheets/myDropdown.css')
     link(rel='stylesheet', href='/stylesheets/jquery-ui-themes-1.11.2/themes/smoothness/jquery-ui.css')
 
-    script(src="/javascripts/zhoumenzi.js")
-    script(src="/javascripts/yujiong.js")
-    script(src="/javascripts/joke.js")
-    script(src="/javascripts/wuya.js")
-    script(src="/javascripts/toto.js")
-    script(src="/javascripts/xiaolong.js")
-    script(src="/javascripts/aming.js")
-    script(src="/javascripts/variable.js")
-    script(src="/javascripts/js2.js")
-    script(src="/javascripts/menzi.js")
-
     script(src="/javascripts/ckeditor/ckeditor.js")
     script(src='http://libs.baidu.com/jquery/2.0.0/jquery.js')
     script(src='http://libs.useso.com/js/jqueryui/1.10.4/jquery-ui.js')
@@ -33,8 +22,19 @@ html(ng-controller="menziController" ng-app="menziApp")
     script(src="/javascripts/dropDown.js")
     script(src="/javascripts/myDropDown.js")
 
+    script(src="/javascripts/zhoumenzi.js")
+    script(src="/javascripts/yujiong.js")
+    script(src="/javascripts/joke.js")
+    script(src="/javascripts/wuya.js")
+    script(src="/javascripts/toto.js")
+    script(src="/javascripts/xiaolong.js")
+    script(src="/javascripts/aming.js")
+    script(src="/javascripts/variable.js")
+    script(src="/javascripts/js2.js")
+    script(src="/javascripts/menzi.js")
+
   body(onkeydown="BindEnter(event)" onload="pageLoad()")
-    div(ng-include="srcUrl")
+    //div(ng-controller="dataController")
     include header
     div#page-container
         div.mainContent
