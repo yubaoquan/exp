@@ -12,17 +12,11 @@ module.exports = function (app) {
       if (data === null) {
         console.log('no myname data');
       }
-
       var peiliaos = [];
-
-      // console.log('data:' + data.zhoumenzi);
       for (var x in data) {
         var peiliao = JSON.parse(data[x]);
         peiliaos.push(peiliao);
       }
-      // console.log(data['zhoumenzi']);
-      // var zhoumenzi = JSON.parse(data.zhoumenzi);
-      // console.log('data.zhoumenzi.name:' + zhoumenzi.name);
       var renderData = {
       title : '闷子聊天模拟器',
         peiliaos : peiliaos,
@@ -30,10 +24,49 @@ module.exports = function (app) {
       };
 
       res.render('index2', renderData);
-  });
     });
+  });
 
   app.route('/selectGender').get(function (req, res, next) {
   	res.render('selectGender');
+  });
+
+  app.route('/getAJoke/:index?').get(function (req, response) {
+    console.log('get a joke from db lindex:' + req.param('index'));
+
+    redisDB.lindex("jokes",req.param('index'), function (err, data) {
+      if (err) {
+        console.log('fail to get the data' + err);
+        //redisDB.quit();
+        return null;
+      }
+      if (data === null) {
+        response.writeHead(200, {"Content-Type": "text/plain;charset=utf-8"});
+        response.write('error');//可以获得数据库中的myname;
+        response.end();
+        return null;
+      }
+
+      response.writeHead(200, {"Content-Type": "text/plain;charset=utf-8"});
+      response.write(data);//可以获得数据库中的myname;
+      response.end();
+    });
+  });
+
+  app.route('/getJokeNumber').get(function (req, res) {
+    redisDB.llen("jokes", function (err, data) {
+      if (err) {
+        console.log('fail to get the data' + err);
+        return null;
+      }
+      res.writeHead(200, {"Content-Type": "text/plain;charset=utf-8"});
+      if (data === null) {
+        res.write('error');//可以获得数据库中的myname;
+        return;
+      }
+      console.log('data:' + data);
+      res.write(data.toString());//可以获得数据库中的myname;
+      res.end();
+    });
   });
 };

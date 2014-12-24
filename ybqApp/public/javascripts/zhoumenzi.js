@@ -21,11 +21,11 @@ var zhoumenzi = (function () {
 
 	//闷子的说话方式;
 	var say = function (whatUSay) {
-		var something =$.ajax({url:"/data/a.json",async:false, dataType : "json"});
-		console.log(something.responseText);
-		for (var x in something) {
-			// console.log(x);
-		}
+		// var something =$.ajax({url:"/data/a.json",async:false, dataType : "json"});
+		// console.log(something.responseText);
+		// for (var x in something) {
+		// 	// console.log(x);
+		// }
 
 		var words = menziWords;
 		var wordIndex = rdm(words.length);

@@ -20,14 +20,26 @@ var wuya = (function () {
     '没人这么给面子还调戏我老人家了'
   ];
 
-  var say = function (whatUSay) {
+  var say = function (whatUSay, refresh, uSayWrapper) {
     if (whatUSay.indexOf("早上好") !== -1) {
       return getASentence(wuyaMorning);
     }
     if (whatUSay.indexOf("个笑话") !== -1) {
-      return getASentence(joke);
+      console.log('totally ' + jokeNumber + ' jokes');
+      if (jokeNumber === 0) {
+        return '我想想';
+      }
+      var jokeIndex = rdm(parseInt(jokeNumber));
+      console.log('joke index:' + jokeIndex);
+      
+      $.ajax({url : "/getAJoke?index=" + jokeIndex, async : true, success : function (joke) {
+        console.log('joke:' + joke);
+        refresh(uSayWrapper, joke);
+      }});
+      return;
     }
-    return getASentence(wuyaWords);
+    var peiliaoSay = getASentence(wuyaWords);
+    refresh(uSayWrapper, peiliaoSay);
   };
 
   return {
@@ -38,4 +50,4 @@ var wuya = (function () {
     joke : joke,
     morningWords : wuyaMorning
   };
-})();
+}());
