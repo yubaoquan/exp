@@ -7,7 +7,7 @@ menziController.controller('sideBarController', ['$scope', 'UPeiliao', function 
   $scope.gay = {
     "imageUrl" : "/images/bili.gif"
   };
-  $scope.uPeiliaos = UPeiliao.query();
+  //$scope.uPeiliaos = UPeiliao.query();
 }]);
 
 menziController.controller('menziController', ['$scope', function ($scope) {
