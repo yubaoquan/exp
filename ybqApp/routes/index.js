@@ -3,45 +3,36 @@ var redisDB = require('../modules/redisDB.js');
 module.exports = function (app) {
   console.log('I am routes');
   app.route('/').get(function (req, res, next) {
-    redisDB.lrange("peiliaos", 0, -1, function (err, data) {
-      if (err) {
-        console.log('fail to get name' + err);
-        redisDB.quit();
-        return null;
-      }
-      if (data === null) {
-        console.log('no data');
-      }
-
-      var peiliaos = [];
-      for (var x in data) {
-        var peiliao = JSON.parse(data[x]);
-        peiliaos.push(peiliao);
-      }
-      var renderData = {
-        title : '闷子聊天模拟器',
-        peiliaos : peiliaos,
-        testdata : 'this is test data'
-      };
-
-      res.render('index2', renderData);
-      // next(123);
-    });
-
     redisDB.multi([
-      ['lrange','peiliaos',0, -1],
-      ['llen','uPeiliaos']
+      ['lrange','peiliaos', 0, -1],
+      ['lrange','uPeiliaos', 0, -1]
       ]).exec(function (err, replies) {
         if (err) {
           console.log(err);
           return false;
         }
-       console.log('rep0:----->' + replies[0]);
-       console.log('rep1:----->' + replies[1]);
+      var 
+        peiliaos = [],
+        uPeiliaos = [];
+
+      replies[0].forEach(function (x) {
+        var peiliao = JSON.parse(x);
+        peiliaos.push(peiliao);
+      });
+      replies[1].forEach(function (x) {
+        var uPeiliao = JSON.parse(x);
+        uPeiliaos.push(uPeiliao);
+      });
+
+      var renderData = {
+        title : '闷子聊天模拟器',
+        peiliaos : peiliaos,
+        uPeiliaos : uPeiliaos,
+        testdata : 'this is test data'
+      };
+
+      res.render('index2', renderData);
     });
-    // function (data) {
-    //   console.log('next:' + data);
-    // }
   });
 
   app.route('/selectGender').get(function (req, res, next) {
@@ -58,15 +49,14 @@ module.exports = function (app) {
         return null;
       }
       if (data === null) {
-        response.writeHead(200, {"Content-Type": "text/plain;charset=utf-8"});
-        response.write('error');//可以获得数据库中的myname;
-        response.end();
+        // response.writeHead(200, {"Content-Type": "text/plain;charset=utf-8"});
+        // response.write('error');
+        // response.end();
+        response.send('error');
+        console.log('can not get the joke, inde :' + req.param('index'));
         return null;
       }
-
-      response.writeHead(200, {"Content-Type": "text/plain;charset=utf-8"});
-      response.write(data);//可以获得数据库中的myname;
-      response.end();
+      response.send(data);
     });
   });
 
@@ -76,13 +66,41 @@ module.exports = function (app) {
         console.log('fail to get the data' + err);
         return null;
       }
-      res.writeHead(200, {"Content-Type": "text/plain;charset=utf-8"});
       if (data === null) {
-        res.write('error');//可以获得数据库中的myname;
+        console.log('can not get joke number');
+        res.send('error');
         return;
       }
-      // console.log('data:' + data);
-      res.write(data.toString());//可以获得数据库中的myname;
+      res.send({jokeNumber : data});
+    });
+  });
+
+  app.route('/getPeiliaos').get(function (req, res) {
+    redisDB.multi([
+      ['lrange','peiliaos', 0, -1],
+      ['lrange','uPeiliaos', 0, -1]
+      ]).exec(function (err, replies) {
+        if (err) {
+          console.log(err);
+          return false;
+        }
+      var 
+        peiliaos = [],
+        uPeiliaos = [];
+
+      replies[0].forEach(function (x) {
+        var peiliao = JSON.parse(x);
+        peiliaos.push(peiliao);
+      });
+      replies[1].forEach(function (x) {
+        var uPeiliao = JSON.parse(x);
+        uPeiliaos.push(uPeiliao);
+      });
+      var tempData = {
+        peiliaos : peiliaos,
+        uPeiliaos : uPeiliaos
+      };
+      res.send(tempData);
       res.end();
     });
   });

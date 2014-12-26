@@ -27,7 +27,8 @@ var wuya = (function () {
     if (whatUSay.indexOf("个笑话") !== -1) {
       console.log('totally ' + jokeNumber + ' jokes');
       if (jokeNumber === 0) {
-        return '我想想';
+        refresh(uSayWrapper, '我想想');
+        return;
       }
       var jokeIndex = rdm(parseInt(jokeNumber));
       console.log('joke index:' + jokeIndex);

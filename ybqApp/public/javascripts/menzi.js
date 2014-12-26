@@ -58,10 +58,9 @@ function selectPeiliao(element) {
   currentPeiliaoElement.className = 'currentPeiliao';
 }
 
-
-
 //初始化陪聊名片;
 function initTooltip() {
+  //init Tooltip for aPeiliaos
   var availablePeiliaos = $('#availablePeiliaos').children();
   console.log('totally ' + availablePeiliaos.length + 'peiliaos');
   for (var i = 0; i < availablePeiliaos.length; i++) {
@@ -69,9 +68,34 @@ function initTooltip() {
     console.log('init ' + peiliaoID);
     var peiliao = peiliaoList[peiliaoID];
     var peiliaoDescWrapper = '<div class = tooltip>' + peiliao.desc + '</div>'
-    var selector = '#' + peiliaoID;
-    $(selector).tooltip({
+    // var selector = '#' + peiliaoID;
+    $('#' + peiliaoID).tooltip({
       content: peiliaoDescWrapper  ,
+      position : {
+                my: "left + 10", 
+                at: "right bottom",
+            },
+            show: {
+                effect: "slideDown",
+                duration: 180,
+            },
+            // hide: {
+            //     effect: "explode",
+            //     duration: 180,
+            // }
+    });
+  }
+
+  //init Tooltip for uPeiliaos
+  var unavailablePeiliaos = $('#unavailablePeiliaos').children();
+  var qnmlgb = '陪聊正被调教';
+  for (var i = 0; i < unavailablePeiliaos.length; i ++) {
+    var x = unavailablePeiliaos[i];
+  // for (xxx in unavailablePeiliaos.length) {
+  //   var x = xxx;
+    console.log('调教:' + x.id);
+    $('#' + x.id).tooltip({
+      content: '<div class = tooltip>' + qnmlgb.charAt(i) + '</div>'  ,
       position : {
                 my: "left + 10", 
                 at: "right bottom",
@@ -184,19 +208,63 @@ function sorryInfo() {
 function initJokeNumber() {
   console.log('init joke number');
   $.ajax({url : "/getJokeNumber", async : true, success : function (data) {
-    console.log('joke number:' + data);
-    jokeNumber = data;
+    console.log('joke number:' + data.jokeNumber);
+    jokeNumber = data.jokeNumber;
+  }});
+}
+
+//异步加载陪聊数据
+function initPeiliaoList() {
+  $.ajax({url : "/getPeiliaos", async : true, success : function (data) {
+    var aPeiliaoArray = data['peiliaos'];
+    console.log('config aPeiliaos');
+    aPeiliaoArray.forEach(function (x) {
+      console.log(x);
+      peiliaoList[x.id]['name'] = x.name;
+      peiliaoList[x.id]['hello'] = x.hello;
+      peiliaoList[x.id]['desc'] = x.desc;
+
+      var node=document.createElement("li");
+      node.setAttribute('id', x.id);
+      node.setAttribute('class', 'aPeiliao');
+      node.setAttribute('title', x.desc);
+      node.setAttribute('onclick', "selectPeiliao(this)");
+      var textnode=document.createTextNode(x.name);
+      node.appendChild(textnode);
+      document.getElementById("availablePeiliaos").appendChild(node);
+    });
+
+    console.log('config uPeiliaos');
+    var uPeiliaoArray = data['uPeiliaos'];
+    uPeiliaoArray.forEach(function (x) {
+      console.log(x);
+      // peiliaoList[x.id]['name'] = x.name;
+      // peiliaoList[x.id]['hello'] = x.hello;
+      // peiliaoList[x.id]['desc'] = x.desc;
+
+      var node=document.createElement("li");
+      node.setAttribute('id', x.id);
+      node.setAttribute('class', 'red');
+      node.setAttribute('title', 'title');
+      // node.setAttribute('onclick', "selectPeiliao(this)");
+      var textnode=document.createTextNode(x.name);
+      node.appendChild(textnode);
+      document.getElementById("unavailablePeiliaos").appendChild(node);
+    });
+
+    currentPeiliaoElement = document.getElementById("zhoumenzi");
+    selectPeiliao(currentPeiliaoElement);
+    console.log('initTooltip() in ajax');
+    initTooltip();
   }});
 }
 
 //界面打开时的初始化工作;
 function pageLoad() {
-// console.log(data);
-// alert('data.zhoumenzi.name:' + data.menzi.name);
-  currentPeiliaoElement = document.getElementById("zhoumenzi");
-// alert(currentPeiliaoElement.getAttribute('xxx'));
-  selectPeiliao(currentPeiliaoElement);
+  initPeiliaoList();
+  // currentPeiliaoElement = document.getElementById("zhoumenzi");
+  // selectPeiliao(currentPeiliaoElement);
   sendMethod = "ce";
-  initTooltip();
+  // initTooltip();
   initJokeNumber();
 }
