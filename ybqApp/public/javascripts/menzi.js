@@ -65,10 +65,9 @@ function initTooltip() {
   console.log('totally ' + availablePeiliaos.length + 'peiliaos');
   for (var i = 0; i < availablePeiliaos.length; i++) {
     var peiliaoID = availablePeiliaos[i].id;
-    console.log('init ' + peiliaoID);
+    // console.log('init ' + peiliaoID);
     var peiliao = peiliaoList[peiliaoID];
     var peiliaoDescWrapper = '<div class = tooltip>' + peiliao.desc + '</div>'
-    // var selector = '#' + peiliaoID;
     $('#' + peiliaoID).tooltip({
       content: peiliaoDescWrapper  ,
       position : {
@@ -91,9 +90,7 @@ function initTooltip() {
   var qnmlgb = '陪聊正被调教';
   for (var i = 0; i < unavailablePeiliaos.length; i ++) {
     var x = unavailablePeiliaos[i];
-  // for (xxx in unavailablePeiliaos.length) {
-  //   var x = xxx;
-    console.log('调教:' + x.id);
+    // console.log('调教:' + x.id);
     $('#' + x.id).tooltip({
       content: '<div class = tooltip>' + qnmlgb.charAt(i) + '</div>'  ,
       position : {
@@ -120,7 +117,7 @@ function rdm(n) {
 //从编辑界面中获取消息,包含消息的纯文本和带样式的文本;;
 function GetContents() {
   var whatUSayInfo = new Object();
-  if (sendMethod == "ck") {
+  if (sendMethod === "ck") {
     var editor = CKEDITOR.instances.iSay;
     whatUSayInfo.wrapper = editor.getData();
     whatUSayInfo.text = editor.document.getBody().getText();
@@ -147,7 +144,7 @@ function talk() {
 
 //用户发送消息之后清空编辑框;
 function clearTextArea() {
-  if (sendMethod == "ck") {
+  if (sendMethod === "ck") {
     var editor = CKEDITOR.instances.iSay;
     editor.setData("");
   } else {
@@ -157,27 +154,27 @@ function clearTextArea() {
 
 function getSex() {
   var sex = prompt("请输入性别");
-  if (sex == "男") {
+  if (sex === "男") {
     return "male";
   }
 }
 
 //更改发送消息的快捷键方式,包含更改编辑界面,textarea和CKEditor之间互相转换;
 function changeSendMethod(obj) {
-  if (sendMethod == obj.value) {
+  if (sendMethod === obj.value) {
     return;
   }
   var textarea = document.getElementById("iSay");
-  if (obj.value == "ck") {
+  if (obj.value === "ck") {
     var ckeditor = document.getElementById("cke_iSay");
-    if (ckeditor == null) {
+    if (ckeditor === null) {
       CKEDITOR.replace('editor1');
     } else {
       textarea.setAttribute("style", "visibility: hidden; display: none;");
       ckeditor.setAttribute("style", "visibility: visible; display: inline;");
     }
   } else {
-    if (sendMethod == "ck") {
+    if (sendMethod === "ck") {
       var ckeditor = document.getElementById("cke_iSay");
       ckeditor.setAttribute("style", "visibility: hidden; display: none;");
       textarea.setAttribute("style", "visibility: visible; display: inline;");
@@ -213,44 +210,71 @@ function initJokeNumber() {
   }});
 }
 
+function appendPeiliaoDocLI(x) {
+  var aNode = document.createElement('a');
+  aNode.setAttribute('href', 'http://www.baidu.com/');
+  aNode.setAttribute('target', 'blank');
+  var liNode=document.createElement("li");
+  // liNode.setAttribute('style', 'display: list-item;');
+  // node.setAttribute('class', 'aPeiliao');
+  // node.setAttribute('title', x.desc);
+  // node.setAttribute('onclick', "selectPeiliao(this)");
+  var textnode=document.createTextNode(x.name);
+  aNode.appendChild(textnode);
+  liNode.appendChild(aNode);
+  document.getElementById("peiliaoDoc").appendChild(liNode);
+  console.log('append:' + x.name);
+}
+
+//添加可用陪聊li
+function appendAPailieoLI(x) {
+  var node=document.createElement("li");
+  node.setAttribute('id', x.id);
+  node.setAttribute('class', 'aPeiliao');
+  node.setAttribute('title', x.desc);
+  node.setAttribute('onclick', "selectPeiliao(this)");
+  var textnode=document.createTextNode(x.name);
+  node.appendChild(textnode);
+  document.getElementById("availablePeiliaos").appendChild(node);
+
+}
+
+//添加不可用陪聊li
+function appendUPeiliaoLI(x) {
+  var node=document.createElement("li");
+  node.setAttribute('id', x.id);
+  node.setAttribute('class', 'red');
+  node.setAttribute('title', 'title');
+  // node.setAttribute('onclick', "selectPeiliao(this)");
+  var textnode=document.createTextNode(x.name);
+  node.appendChild(textnode);
+  document.getElementById("unavailablePeiliaos").appendChild(node);
+}
+
 //异步加载陪聊数据
 function initPeiliaoList() {
   $.ajax({url : "/getPeiliaos", async : true, success : function (data) {
     var aPeiliaoArray = data['peiliaos'];
     console.log('config aPeiliaos');
     aPeiliaoArray.forEach(function (x) {
-      console.log(x);
+      // console.log(x);
       peiliaoList[x.id]['name'] = x.name;
       peiliaoList[x.id]['hello'] = x.hello;
       peiliaoList[x.id]['desc'] = x.desc;
-
-      var node=document.createElement("li");
-      node.setAttribute('id', x.id);
-      node.setAttribute('class', 'aPeiliao');
-      node.setAttribute('title', x.desc);
-      node.setAttribute('onclick', "selectPeiliao(this)");
-      var textnode=document.createTextNode(x.name);
-      node.appendChild(textnode);
-      document.getElementById("availablePeiliaos").appendChild(node);
+      appendAPailieoLI(x);
+      appendPeiliaoDocLI(x);
     });
 
     console.log('config uPeiliaos');
     var uPeiliaoArray = data['uPeiliaos'];
     uPeiliaoArray.forEach(function (x) {
-      console.log(x);
-      // peiliaoList[x.id]['name'] = x.name;
-      // peiliaoList[x.id]['hello'] = x.hello;
-      // peiliaoList[x.id]['desc'] = x.desc;
-
-      var node=document.createElement("li");
-      node.setAttribute('id', x.id);
-      node.setAttribute('class', 'red');
-      node.setAttribute('title', 'title');
-      // node.setAttribute('onclick', "selectPeiliao(this)");
-      var textnode=document.createTextNode(x.name);
-      node.appendChild(textnode);
-      document.getElementById("unavailablePeiliaos").appendChild(node);
+      appendUPeiliaoLI(x);
+      appendPeiliaoDocLI(x);
     });
+    //初始化陪聊介绍的下拉效果
+    // $("#myDropDown").my_dropdown();
+    var drpdn = document.getElementById('myDropDown');
+    initDropDown(drpdn);
 
     currentPeiliaoElement = document.getElementById("zhoumenzi");
     selectPeiliao(currentPeiliaoElement);
