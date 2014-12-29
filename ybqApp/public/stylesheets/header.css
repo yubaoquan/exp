@@ -16,7 +16,7 @@ color: white;
  text-decoration: none;
 }
 
-.header ul{
+.header .centerUL{
 	padding: 0;
 	/*height:38px;*/
 	width:800px;
@@ -27,7 +27,9 @@ color: white;
 	/*font-size: 12px;*/
 }
 
-.header ul li{
+
+
+.header li{
 	float: left;
 	list-style-type:none;
 	/*margin:5px;*/
@@ -36,9 +38,9 @@ color: white;
 }
 
 .search {
-	float: left;
+	float: right;
 	color: yellow;
-	margin-left: 15em;
+	margin-right: 1em;
 	margin-top: 3px;
 }
 /*.headerPadding{
@@ -54,4 +56,17 @@ color: white;
 
 #homeIcon {
 	margin-top: -4px;
+}
+
+.regNlogin {
+	float: left;
+	margin-top: 8px;
+	margin-bottom: 0;
+}
+
+.regNlogin li {
+	float: left;
+	margin-left: 1em;
+	list-style-type:none;
+	margin-top: 0;
 }
