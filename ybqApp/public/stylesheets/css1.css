@@ -1,5 +1,5 @@
 * {
-	border-radius: 0.2em;
+	/*border-radius: 0.2em;*/
 }
 
 .hello {
@@ -49,6 +49,7 @@ body {
 	filter:alpha(Opacity=80);
 	-moz-opacity:0.8;
 	opacity: 0.8;
+	border-radius: 0.2em;
 }
 
 #content {

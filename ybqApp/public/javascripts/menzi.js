@@ -292,3 +292,19 @@ function pageLoad() {
   // initTooltip();
   initJokeNumber();
 }
+
+//在页内切换页面
+function shiftPage(page) {
+  if (page === 'aboutMe') {
+    document.getElementById('page-container').style.display='none';
+    var div = document.createElement('div');
+    div.setAttribute('id', 'aboutMe');
+    var textnode = document.createTextNode('aboutMe');
+    div.appendChild(textnode);
+    document.body.appendChild(div);
+  } else {
+  	document.getElementById('page-container').removeAttribute('style');
+    document.body.removeChild(document.getElementById('aboutMe'));
+  }
+	
+}
