@@ -212,7 +212,7 @@ function initJokeNumber() {
 
 function appendPeiliaoDocLI(x) {
   var aNode = document.createElement('a');
-  aNode.setAttribute('href', 'http://www.baidu.com/');
+  aNode.setAttribute('href', 'peiliaoDoc/?peiliaoNo=' + x.id);
   aNode.setAttribute('target', 'blank');
   var liNode=document.createElement("li");
   // liNode.setAttribute('style', 'display: list-item;');
